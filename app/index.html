@@ -3,7 +3,7 @@
 <html ng-app="blocitoff">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Bloc Base Project</title>
+    <title>Blocitoff Project</title>
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
@@ -23,6 +23,10 @@
   firebase.initializeApp(config);
 </script>
 
+<!-- CSS (load bootstrap) -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
     </script>
@@ -38,5 +42,32 @@
 
     <!-- Application Files -->
     <script src="/scripts/app.js"></script>
+
+    <!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a ui-sref="home">Home</a></li>
+        <li><a ui-sref="about">About</a></li>
+    </ul>
+</nav>
+        <!-- TASK FORM -->
+    <div class="container">
+      <body ng-app="blocitoff" ng-controller="HomeCtrl">
+        <h1>To Do List</h1>
+        <ul>
+          <li ng-repeat="task in tasks">
+            <input ng-model="task.name" ng-change="tasks.$save(task)" />
+            <button ng-click="tasks.$remove(task)">Delete Task</button>
+          </li>
+        </ul>
+        <form ng-submit="addTask()">
+          <input ng-model="newTaskName" />
+          <button type="submit">Add Task</button>
+       </form>
+        <div ui-view>
+      </div>
 </body>
 </html>
