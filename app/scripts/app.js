@@ -1,19 +1,13 @@
-(function() {
-  function config($locationProvider, $stateProvider) {
-        $locationProvider
-            .html5Mode({
-                enabled: true,
-                requireBase: false
-             });
+var blocitoff = angular.module('blocitoff', ['firebase']);
+blocitoff.controller('TodoCtrl', function TodoCtrl($scope, $firebase) {
+  $scope.tasks = [];
+        $scope.add = function() {
+            $scope.tasks.push($scope.title);
+            $scope.title = ''
+        }
 
-        $stateProvider
-            .state('home', {
-                url: '/',
-                controller: 'HomeCtrl as home',
-                templateUrl: '/templates/home.html'
-            });
-    }
-    angular
-        .module('blocitoff', ['ui.router', 'firebase'])
-        .config(config);
-})();
+    $scope.delete = function() {
+        $scope.tasks.pop($scope.title);
+
+      }
+  })

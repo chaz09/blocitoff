@@ -1,73 +1,42 @@
-<!DOCTYPE html>
-<html>
-<html ng-app="blocitoff">
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Blocitoff Project</title>
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
-<body>
-    <ui-view></ui-view>
+<!doctype html>
+<html lang="en" ng-app="blocitoff" data-framework="firebase">
+    <head>
+        <meta charset="utf-8">
+        <title>Blocitoff</title>
 
-    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-<script>
+    </head>
+    <body>
+    <h1>Firebase Todo</h1>
+    <!-- Angular -->
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+       <!-- AngularUI Router -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+       <!-- FireBase -->
+       <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+       <!-- AngularFire -->
+       <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+       <!-- Application Files -->
+       <script src="/scripts/app.js"></script>
+   </body>
+
+   <script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAIEgcc_qaUgwHKyWtKAtAzBm7MuBe-PMg",
     authDomain: "blocitoff-d41dd.firebaseapp.com",
     databaseURL: "https://blocitoff-d41dd.firebaseio.com",
     projectId: "blocitoff-d41dd",
-    storageBucket: "",
+    storageBucket: "blocitoff-d41dd.appspot.com",
     messagingSenderId: "715425872104"
   };
   firebase.initializeApp(config);
 </script>
 
-<!-- CSS (load bootstrap) -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-
-    <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
-    </script>
-
-    <!-- AngularUI Router -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js">
-     </script>
-
-     <!-- FireBase -->
-     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-     <!-- AngularFire -->
-     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-
-    <!-- Application Files -->
-    <script src="/scripts/app.js"></script>
-
-    <!-- NAVIGATION -->
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li><a ui-sref="home">Home</a></li>
-        <li><a ui-sref="about">About</a></li>
-    </ul>
-</nav>
-        <!-- TASK FORM -->
-    <div class="container">
-      <body ng-app="blocitoff" ng-controller="HomeCtrl">
-        <h1>To Do List</h1>
-        <ul>
-          <li ng-repeat="task in tasks">
-            <input ng-model="task.name" ng-change="tasks.$save(task)" />
-            <button ng-click="tasks.$remove(task)">Delete Task</button>
-          </li>
-        </ul>
-        <form ng-submit="addTask()">
-          <input ng-model="newTaskName" />
-          <button type="submit">Add Task</button>
-       </form>
-        <div ui-view>
-      </div>
-</body>
-</html>
+  <div class='container' ng-controller="TodoCtrl">
+    <input ng-model="title"><button ng-click="add()">Add</button>
+              <li ng-repeat="t in tasks">{{t}}</li>
+              <button class='btn btn-danger pull-right' ng-click="delete()">Delete</button>
